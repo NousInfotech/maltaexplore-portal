@@ -1,12 +1,19 @@
-import { auth } from '@clerk/nextjs/server';
+'use client';
+import { useAuth } from '@/components/layout/providers';
 import { redirect } from 'next/navigation';
+import { useEffect } from 'react';
+import type React from 'react';
 
-export default async function Dashboard() {
-  const { userId } = await auth();
-
-  if (!userId) {
-    return redirect('/auth/sign-in');
-  } else {
-    redirect('/dashboard/overview');
-  }
+export default function Dashboard() {
+  const { user, loading } = useAuth();
+  useEffect(() => {
+    if (!loading) {
+      if (!user) {
+        redirect('/auth/sign-in');
+      } else {
+        redirect('/dashboard/overview');
+      }
+    }
+  }, [user, loading]);
+  return null;
 }

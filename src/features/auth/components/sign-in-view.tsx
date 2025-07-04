@@ -1,101 +1,123 @@
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { SignIn as ClerkSignInForm } from '@clerk/nextjs';
-import { GitHubLogoIcon } from '@radix-ui/react-icons';
-import { IconStar } from '@tabler/icons-react';
-import { Metadata } from 'next';
-import Link from 'next/link';
+'use client';
+import { useState } from 'react';
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup
+} from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: 'Authentication',
-  description: 'Authentication forms built using the components.'
-};
+export default function SignInViewPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-export default function SignInViewPage({ stars }: { stars: number }) {
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      router.push('/dashboard/overview');
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      // Redirect or show success as needed
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className='relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0'>
-      <Link
-        href='/examples/authentication'
-        className={cn(
-          buttonVariants({ variant: 'ghost' }),
-          'absolute top-4 right-4 hidden md:top-8 md:right-8'
-        )}
+    <div className='bg-muted flex h-screen items-center justify-center'>
+      <form
+        onSubmit={handleSignIn}
+        className='flex w-96 flex-col gap-4 rounded-xl p-8 shadow-lg'
       >
-        Login
-      </Link>
-      <div className='bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r'>
-        <div className='absolute inset-0 bg-zinc-900' />
-        <div className='relative z-20 flex items-center text-lg font-medium'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='mr-2 h-6 w-6'
-          >
-            <path d='M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3' />
-          </svg>
-          Logo
-        </div>
-        <div className='relative z-20 mt-auto'>
-          <blockquote className='space-y-2'>
-            <p className='text-lg'>
-              &ldquo;This starter template has saved me countless hours of work
-              and helped me deliver projects to my clients faster than ever
-              before.&rdquo;
-            </p>
-            <footer className='text-sm'>Random Dude</footer>
-          </blockquote>
-        </div>
-      </div>
-      <div className='flex h-full items-center justify-center p-4 lg:p-8'>
-        <div className='flex w-full max-w-md flex-col items-center justify-center space-y-6'>
-          {/* github link  */}
-          <Link
-            className={cn('group inline-flex hover:text-yellow-200')}
-            target='_blank'
-            href={'https://github.com/kiranism/next-shadcn-dashboard-starter'}
-          >
-            <div className='flex items-center'>
-              <GitHubLogoIcon className='size-4' />
-              <span className='ml-1 inline'>Star on GitHub</span>{' '}
-            </div>
-            <div className='ml-2 flex items-center gap-1 text-sm md:flex'>
-              <IconStar
-                className='size-4 text-gray-500 transition-all duration-300 group-hover:text-yellow-300'
-                fill='currentColor'
+        <h2 className='mb-2 text-center text-2xl font-bold'>
+          Sign in to your account
+        </h2>
+        <Button
+          type='button'
+          variant='outline'
+          className='w-full'
+          onClick={handleGoogleSignIn}
+          disabled={loading}
+        >
+          <svg className='mr-2 h-5 w-5' viewBox='0 0 24 24'>
+            <g>
+              <path
+                fill='#4285F4'
+                d='M21.805 10.023h-9.765v3.977h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.125-2.789-6.125-6.148 0-3.359 2.75-6.148 6.125-6.148 1.922 0 3.211.82 3.953 1.523l2.703-2.633c-1.719-1.609-3.938-2.602-6.656-2.602-5.523 0-10 4.477-10 10s4.477 10 10 10c5.75 0 9.547-4.031 9.547-9.719 0-.656-.07-1.148-.156-1.648z'
               />
-              <span className='font-display font-medium'>{stars}</span>
-            </div>
-          </Link>
-          <ClerkSignInForm
-            initialValues={{
-              emailAddress: 'your_mail+clerk_test@example.com'
-            }}
-          />
-
-          <p className='text-muted-foreground px-8 text-center text-sm'>
-            By clicking continue, you agree to our{' '}
-            <Link
-              href='/terms'
-              className='hover:text-primary underline underline-offset-4'
-            >
-              Terms of Service
-            </Link>{' '}
-            and{' '}
-            <Link
-              href='/privacy'
-              className='hover:text-primary underline underline-offset-4'
-            >
-              Privacy Policy
-            </Link>
-            .
-          </p>
+              <path
+                fill='#34A853'
+                d='M3.545 7.548l3.086 2.266c.844-1.609 2.406-2.789 4.164-2.789 1.18 0 2.242.406 3.078 1.203l2.32-2.266c-1.406-1.312-3.203-2.109-5.398-2.109-3.672 0-6.75 2.477-7.867 5.844z'
+              />
+              <path
+                fill='#FBBC05'
+                d='M12 22c2.438 0 4.484-.797 5.977-2.172l-2.797-2.289c-.781.547-1.781.867-3.18.867-2.75 0-5.078-1.859-5.914-4.406l-3.086 2.391c1.672 3.328 5.203 5.609 9 5.609z'
+              />
+              <path
+                fill='#EA4335'
+                d='M21.805 10.023h-9.765v3.977h5.617c-.242 1.242-1.484 3.648-5.617 3.648-3.375 0-6.125-2.789-6.125-6.148 0-3.359 2.75-6.148 6.125-6.148 1.922 0 3.211.82 3.953 1.523l2.703-2.633c-1.719-1.609-3.938-2.602-6.656-2.602-5.523 0-10 4.477-10 10s4.477 10 10 10c5.75 0 9.547-4.031 9.547-9.719 0-.656-.07-1.148-.156-1.648z'
+              />
+            </g>
+          </svg>
+          Sign in with Google
+        </Button>
+        <div className='relative'>
+          <div className='absolute inset-0 flex items-center'>
+            <span className='w-full border-t' />
+          </div>
+          <div className='relative flex justify-center text-xs uppercase'>
+            <span className='text-muted-foreground bg-white px-2'>or</span>
+          </div>
         </div>
-      </div>
+        <Input
+          type='email'
+          placeholder='Email'
+          value={email}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
+          required
+          disabled={loading}
+        />
+        <Input
+          type='password'
+          placeholder='Password'
+          value={password}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
+          required
+          disabled={loading}
+        />
+        {error && (
+          <div className='text-center text-sm text-red-500'>{error}</div>
+        )}
+        <Button type='submit' className='w-full' disabled={loading}>
+          {loading ? 'Signing in...' : 'Sign In'}
+        </Button>
+      </form>
     </div>
   );
 }

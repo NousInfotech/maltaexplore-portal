@@ -1,13 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { User } from 'firebase/auth';
 
 interface UserAvatarProfileProps {
   className?: string;
   showInfo?: boolean;
-  user: {
-    imageUrl?: string;
-    fullName?: string | null;
-    emailAddresses: Array<{ emailAddress: string }>;
-  } | null;
+  user: User | null;
 }
 
 export function UserAvatarProfile({
@@ -18,18 +15,23 @@ export function UserAvatarProfile({
   return (
     <div className='flex items-center gap-2'>
       <Avatar className={className}>
-        <AvatarImage src={user?.imageUrl || ''} alt={user?.fullName || ''} />
+        <AvatarImage
+          src={user?.photoURL || ''}
+          alt={user?.displayName || user?.email || ''}
+        />
         <AvatarFallback className='rounded-lg'>
-          {user?.fullName?.slice(0, 2)?.toUpperCase() || 'CN'}
+          {user?.displayName?.slice(0, 2)?.toUpperCase() ||
+            user?.email?.slice(0, 2)?.toUpperCase() ||
+            'CN'}
         </AvatarFallback>
       </Avatar>
 
       {showInfo && (
         <div className='grid flex-1 text-left text-sm leading-tight'>
-          <span className='truncate font-semibold'>{user?.fullName || ''}</span>
-          <span className='truncate text-xs'>
-            {user?.emailAddresses[0].emailAddress || ''}
+          <span className='truncate font-semibold'>
+            {user?.displayName || user?.email || ''}
           </span>
+          <span className='truncate text-xs'>{user?.email || ''}</span>
         </div>
       )}
     </div>
