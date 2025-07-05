@@ -49,8 +49,12 @@ export function RecentSales() {
   return (
     <Card className='h-full'>
       <CardHeader>
-        <CardTitle>Recent Sales</CardTitle>
-        <CardDescription>You made 265 sales this month.</CardDescription>
+        <CardTitle>Recent Projects</CardTitle>
+        {/* <CardDescription>You have done 265 projects this month.</CardDescription> */}
+        <div className='flex justify-between'>
+          <h6>Project Name</h6>
+          <h6>Budget</h6>
+        </div>
       </CardHeader>
       <CardContent>
         <div className='space-y-8'>
