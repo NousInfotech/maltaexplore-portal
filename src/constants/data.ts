@@ -65,6 +65,12 @@ export const navItems: NavItem[] = [
         icon: 'login'
       }
     ]
+  },
+  {
+    title: 'Connect',
+    url: '/dashboard/connect',
+    icon: 'connect',
+    shortcut: ['c', 'c']
   }
 ];
 
