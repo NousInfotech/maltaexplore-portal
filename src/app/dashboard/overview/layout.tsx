@@ -117,7 +117,7 @@ export default function OverViewLayout({
             </CardHeader>
             <CardFooter className='flex-col items-start gap-1.5 text-sm'>
               <div className='line-clamp-1 flex gap-2 font-medium'>
-                Today's Meeting <IconTrendingUp className='size-4' />
+                Today&rsquo;s Meeting <IconTrendingUp className='size-4' />
               </div>
               <div className='text-muted-foreground'>
                 See All the Meeting Available

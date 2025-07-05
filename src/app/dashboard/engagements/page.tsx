@@ -78,7 +78,7 @@ export default async function AuditProjectsPage() {
       <div className='container mx-auto py-10'>
         <h1 className='mb-4 text-3xl font-bold'>Audit & Tax Engagements</h1>
         <p className='text-muted-foreground mb-8'>
-          A list of your firm's current and past engagements.
+          A list of your firm&rsquo;s current and past engagements.
         </p>
         <div className='overflow-x-auto'>
           <DataTable columns={columns} data={data} />
