@@ -57,6 +57,12 @@ export const navItems: NavItem[] = [
     shortcut: ['k', 'k'],
     isActive: false,
     items: [] // No child items
+  },
+  {
+    title: 'Connect',
+    url: '/dashboard/connect',
+    icon: 'connect',
+    shortcut: ['c', 'c']
   }
 ];
 
