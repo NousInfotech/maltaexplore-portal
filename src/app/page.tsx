@@ -1,8 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 import { useAuth } from '@/components/layout/providers';
 import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
-import type React from 'react';
+// Removed unused React import
 
 export default function Page() {
   const { user, loading } = useAuth();

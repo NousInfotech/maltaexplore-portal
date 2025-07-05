@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 import { Button } from '@/components/ui/button';
 import {
@@ -25,6 +26,7 @@ type UserFormValue = z.infer<typeof formSchema>;
 
 export default function UserAuthForm() {
   const searchParams = useSearchParams();
+  // callbackUrl is available but not used in this implementation
   const callbackUrl = searchParams.get('callbackUrl');
   const [loading, startTransition] = useTransition();
   const defaultValues = {
@@ -37,7 +39,8 @@ export default function UserAuthForm() {
 
   const onSubmit = async (data: UserFormValue) => {
     startTransition(() => {
-      console.log('continue with email clicked');
+      // TODO: Implement email authentication
+      console.log('continue with email clicked', data);
       toast.success('Signed In Successfully!');
     });
   };

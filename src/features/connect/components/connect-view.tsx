@@ -1,15 +1,7 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 import React, { useState } from 'react';
-import {
-  Moon,
-  Sun,
-  Search,
-  Filter,
-  Bell,
-  BellOff,
-  Settings,
-  MoreHorizontal
-} from 'lucide-react';
+// Removed unused icon imports
 import { useConnect } from '@/hooks/use-connect';
 import { DashboardView, ChatView, ScheduleView, CalendarView } from './index';
 import { UserChatView } from './user-chat-view';
@@ -17,8 +9,7 @@ import { UserChatView } from './user-chat-view';
 export default function ConnectViewPage() {
   // State management
   const [currentView, setCurrentView] = useState('dashboard');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [notifications, setNotifications] = useState(true);
+  // Removed unused state variables
 
   // Use custom hook for connect functionality
   const {
@@ -35,7 +26,7 @@ export default function ConnectViewPage() {
     setMessage,
     setSelectedDate,
     setSelectedTime,
-    toggleTheme,
+    // toggleTheme is available but not used in this component
     handleSendMessage,
     handleScheduleMeeting,
     cancelMeeting

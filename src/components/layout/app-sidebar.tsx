@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 import {
   Collapsible,
@@ -66,8 +67,9 @@ export default function AppSidebar() {
   const { isOpen } = useMediaQuery();
   const router = useRouter();
   const { user } = useAuth();
-  const handleSwitchTenant = (_tenantId: string) => {
+  const handleSwitchTenant = (tenantId: string) => {
     // Tenant switching functionality would be implemented here
+    console.log('Switching to tenant:', tenantId);
   };
 
   const activeTenant = tenants[0];

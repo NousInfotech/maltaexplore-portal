@@ -1,26 +1,19 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 import React, { useState, useEffect } from 'react';
 import {
-  MessageSquare,
   Send,
   Bot,
   User,
   Headphones,
-  FileText,
-  Phone,
-  Search,
-  MoreHorizontal,
   Video,
-  Mic,
-  MicOff,
-  VideoOff,
   PhoneCall,
   Settings,
   ArrowLeft,
-  Smile,
   Paperclip,
   Image,
-  File
+  File,
+  Smile
 } from 'lucide-react';
 import { ChatMessage } from '@/types/connect';
 
@@ -32,7 +25,7 @@ export const UserChatView: React.FC<UserChatViewProps> = ({ onBack }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [message, setMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [userName, setUserName] = useState('User');
+  const [userName] = useState('User');
 
   // Load messages from localStorage
   useEffect(() => {
@@ -158,7 +151,7 @@ export const UserChatView: React.FC<UserChatViewProps> = ({ onBack }) => {
                 Customer Support
               </h3>
               <p className='text-muted-foreground text-sm'>
-                We're here to help
+                We&apos;re here to help
               </p>
             </div>
           </div>

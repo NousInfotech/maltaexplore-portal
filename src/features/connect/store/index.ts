@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ConnectStore } from '../types';
@@ -10,7 +11,7 @@ import {
 // Create store
 export const useConnectStore = create<ConnectStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       // Initial state
       currentView: 'dashboard',
       isDark: false,

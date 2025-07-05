@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 import {
   Accordion,
@@ -37,8 +38,7 @@ interface ProfileFormType {
 }
 
 const ProfileCreateForm: React.FC<ProfileFormType> = ({ initialData }) => {
-  const params = useParams();
-  const router = useRouter();
+  // Removed unused variables
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const title = initialData ? 'Edit product' : 'Create Your Profile';

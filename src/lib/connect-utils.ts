@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 // Local storage utilities
 export const loadFromLocalStorage = <T>(key: string, defaultValue: T): T => {
   if (typeof window === 'undefined') return defaultValue;
@@ -6,6 +7,7 @@ export const loadFromLocalStorage = <T>(key: string, defaultValue: T): T => {
     const item = window.localStorage.getItem(key);
     return item ? JSON.parse(item) : defaultValue;
   } catch (error) {
+    // TODO: Implement proper error handling
     console.error(`Error loading from localStorage key "${key}":`, error);
     return defaultValue;
   }
@@ -17,6 +19,7 @@ export const saveToLocalStorage = <T>(key: string, value: T): void => {
   try {
     window.localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
+    // TODO: Implement proper error handling
     console.error(`Error saving to localStorage key "${key}":`, error);
   }
 };

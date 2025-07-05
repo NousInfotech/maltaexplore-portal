@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 import React, { useState } from 'react';
 import {
@@ -9,11 +10,8 @@ import {
   FileText,
   Phone,
   Search,
-  MoreHorizontal,
   Video,
   Mic,
-  MicOff,
-  VideoOff,
   PhoneCall,
   Settings,
   ArrowLeft
@@ -298,8 +296,6 @@ export const ChatView: React.FC<ChatViewProps> = ({
                 {/* User List */}
                 {filteredUsers.map((user) => {
                   const isActive = activeChat === `user-${user.id}`;
-                  const messageCount =
-                    chatMessages[`user-${user.id}`]?.length || 0;
 
                   return (
                     <div

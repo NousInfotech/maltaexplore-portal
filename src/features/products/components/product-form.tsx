@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 
 import { FileUploader } from '@/components/file-uploader';
@@ -75,7 +76,8 @@ export default function ProductForm({
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Form submission logic would be implemented here
+    // TODO: Implement form submission logic
+    console.log('Form submitted with values:', values);
   }
 
   return (

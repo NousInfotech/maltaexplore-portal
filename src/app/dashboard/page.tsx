@@ -2,7 +2,7 @@
 import { useAuth } from '@/components/layout/providers';
 import { redirect } from 'next/navigation';
 import { useEffect } from 'react';
-import type React from 'react';
+// Removed unused React import
 
 export default function Dashboard() {
   const { user, loading } = useAuth();

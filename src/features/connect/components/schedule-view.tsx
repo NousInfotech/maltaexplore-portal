@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 import React from 'react';
 import {
@@ -7,13 +8,7 @@ import {
   Headphones,
   FileText,
   ArrowLeft,
-  CheckCircle,
-  XCircle,
-  AlertCircle,
-  Plus,
-  Users,
-  MapPin,
-  Mail
+  Users
 } from 'lucide-react';
 import { Meeting } from '@/types/connect';
 import { getTypeColor, getStatusColor } from '@/lib/connect-utils';

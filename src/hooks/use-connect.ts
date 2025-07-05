@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChatMessage, Meeting, Contact } from '@/types/connect';
+import { ChatMessage, Meeting } from '@/types/connect';
 import {
   initialChatMessages,
   initialMeetings,

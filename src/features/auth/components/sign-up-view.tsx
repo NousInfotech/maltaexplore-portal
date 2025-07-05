@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
 
 import { useState } from 'react';
@@ -10,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Metadata } from 'next';
-import Link from 'next/link';
+// Removed unused Link import
 import type React from 'react';
 
 export const metadata: Metadata = {

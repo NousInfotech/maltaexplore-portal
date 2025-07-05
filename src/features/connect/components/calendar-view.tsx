@@ -7,14 +7,10 @@ import {
   Headphones,
   FileText,
   ArrowLeft,
-  CheckCircle,
   XCircle,
-  AlertCircle,
   Plus,
   Users,
-  MapPin,
   Mail,
-  Trash2,
   Edit3,
   MoreHorizontal
 } from 'lucide-react';
