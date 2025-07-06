@@ -28,7 +28,7 @@ export default function PaymentsPage() {
             </div>
             <CardTitle className='text-2xl'>Coming Soon</CardTitle>
             <CardDescription className='text-lg'>
-              We're working hard to bring you a comprehensive payments and billing system.
+              {"We're working hard to bring you a comprehensive payments and billing system."}
             </CardDescription>
           </CardHeader>
           <CardContent className='space-y-6'>
@@ -115,8 +115,7 @@ export default function PaymentsPage() {
                 <Badge variant='secondary'>Current Status</Badge>
               </div>
               <p className='text-sm text-muted-foreground'>
-                For now, you can manage your engagements and proposals. The payments system will be integrated 
-                once it's ready, allowing you to seamlessly handle billing for all your completed projects.
+                {"For now, you can manage your engagements and proposals. The payments system will be integrated once it's ready, allowing you to seamlessly handle billing for all your completed projects."}
               </p>
             </div>
           </CardContent>
