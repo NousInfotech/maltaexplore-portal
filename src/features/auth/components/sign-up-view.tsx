@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import type React from 'react';
+import { redirect } from 'next/navigation';
+import Image from 'next/image';
 
 interface SignUpViewPageProps {
   isDark?: boolean;
@@ -53,7 +55,6 @@ export default function SignUpViewPage({
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      // Redirect or show success as needed
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -69,23 +70,14 @@ export default function SignUpViewPage({
       >
         {/* Logo/Brand */}
         <div className='flex items-center space-x-3'>
-          <div
-            className={`h-8 w-8 ${isDark ? 'bg-blue-500' : 'bg-blue-600'} flex items-center justify-center rounded-lg`}
-          >
-            <svg
-              className='h-5 w-5 text-white'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M13 10V3L4 14h7v7l9-11h-7z'
-              />
-            </svg>
-          </div>
+          <Image
+            src={'/assets/sheetswaylogo.png'}
+            alt='Sheetsway Logo'
+            width={180}
+            height={40}
+            priority
+            className='object-contain'
+          />
         </div>
 
         {/* Testimonial */}

@@ -19,52 +19,58 @@ export const navItems: NavItem[] = [
     icon: 'dashboard',
     isActive: false,
     shortcut: ['d', 'd'],
-    items: [] // Empty array as there are no child items for Dashboard
+    items: []
   },
   {
-    title: 'Product',
-    url: '/dashboard/product',
-    icon: 'product',
+    title: 'Request',
+    url: '/dashboard/request',
+    icon: 'request', // IconFilePlus
+    isActive: false,
+    shortcut: ['r', 'r'],
+    items: []
+  },
+  {
+    title: 'Proposals',
+    url: '/dashboard/proposals',
+    icon: 'proposals', // IconFileText
+    isActive: false,
     shortcut: ['p', 'p'],
-    isActive: false,
-    items: [] // No child items
+    items: []
   },
   {
-    title: 'Account',
-    url: '#', // Placeholder as there is no direct link for the parent
-    icon: 'billing',
-    isActive: true,
-
-    items: [
-      {
-        title: 'Profile',
-        url: '/dashboard/profile',
-        icon: 'userPen',
-        shortcut: ['m', 'm']
-      },
-      {
-        title: 'Login',
-        shortcut: ['l', 'l'],
-        url: '/',
-        icon: 'login'
-      }
-    ]
+    title: 'Active Engagements',
+    url: '/dashboard/engagements',
+    icon: 'engagements', // IconBriefcase
+    isActive: false,
+    shortcut: ['e', 'e'],
+    items: []
   },
   {
-    title: 'Kanban',
-    url: '/dashboard/kanban',
-    icon: 'kanban',
-    shortcut: ['k', 'k'],
+    title: 'Payments',
+    url: '/dashboard/payments',
+    icon: 'payments', // IconCreditCard
     isActive: false,
-    items: [] // No child items
+    shortcut: ['y', 'y'],
+    items: []
+  },
+  {
+    title: 'History',
+    url: '/dashboard/history',
+    icon: 'history', // IconClock
+    isActive: false,
+    shortcut: ['h', 'h'],
+    items: []
   },
   {
     title: 'Connect',
     url: '/dashboard/connect',
-    icon: 'connect',
-    shortcut: ['c', 'c']
+    icon: 'connect', // IconMessageCircle
+    shortcut: ['c', 'c'],
+    isActive: false,
+    items: []
   }
 ];
+
 
 export interface SaleUser {
   id: number;

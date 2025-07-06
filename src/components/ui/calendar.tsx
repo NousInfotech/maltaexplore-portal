@@ -6,11 +6,11 @@ import type { ComponentProps } from 'react';
 
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+// import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 
-// Custom icons that meet the DayPicker requirements
-const LeftIcon = () => <ChevronLeftIcon className='size-4' />;
-const RightIcon = () => <ChevronRightIcon className='size-4' />;
+// // Custom icons that meet the DayPicker requirements
+// const LeftIcon = () => <ChevronLeftIcon className='size-4' />;
+// const RightIcon = () => <ChevronRightIcon className='size-4' />;
 
 function Calendar({
   className,
@@ -64,10 +64,10 @@ function Calendar({
         day_hidden: 'invisible',
         ...classNames
       }}
-      components={{
-        IconLeft: LeftIcon,
-        IconRight: RightIcon
-      }}
+      // components={{
+      //   // IconLeft: LeftIcon,
+      //   // IconRight: RightIcon
+      // }}
       {...props}
     />
   );
