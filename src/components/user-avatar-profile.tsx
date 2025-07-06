@@ -16,7 +16,7 @@ export function UserAvatarProfile({
     <div className='flex items-center gap-2'>
       <Avatar className={className}>
         <AvatarImage
-          src={user?.photoURL || ''}
+          src={user?.photoURL ? user.photoURL : ''}
           alt={user?.displayName || user?.email || ''}
         />
         <AvatarFallback className='rounded-lg'>

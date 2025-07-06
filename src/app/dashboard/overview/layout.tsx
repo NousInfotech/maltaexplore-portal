@@ -1,4 +1,7 @@
+'use client';
+
 import PageContainer from '@/components/layout/page-container';
+import { useAuth } from '@/components/layout/providers';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,6 +12,7 @@ import {
   CardAction,
   CardFooter
 } from '@/components/ui/card';
+import { auth } from '@/lib/firebase';
 import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
 import Link from 'next/link';
 import React from 'react';
@@ -48,12 +52,14 @@ export default function OverViewLayout({
     }
   ];
 
+  const { user } = useAuth();
+
   return (
     <PageContainer>
       <div className='flex flex-1 flex-col space-y-2'>
         <div className='flex items-center justify-between space-y-2'>
           <h2 className='text-2xl font-bold tracking-tight'>
-            Hi, Welcome back 👋
+            Hi, Welcome Back {user?.displayName } 👋 
           </h2>
         </div>
 

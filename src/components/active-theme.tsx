@@ -56,7 +56,7 @@ export function ActiveThemeProvider({
   );
 }
 
-export function useThemeConfig() {
+export function useThemeConfig(p0: { defaultTheme: string; }) {
   const context = useContext(ThemeContext);
   if (context === undefined) {
     throw new Error(

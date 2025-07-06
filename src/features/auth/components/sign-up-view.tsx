@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Metadata } from 'next';
 // Removed unused Link import
 import type React from 'react';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Authentication',
@@ -45,7 +46,6 @@ export default function SignUpViewPage() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      // Redirect or show success as needed
     } catch (err: any) {
       setError(err.message);
     } finally {

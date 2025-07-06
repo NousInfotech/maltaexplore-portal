@@ -37,7 +37,8 @@ export default function SignInViewPage() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      // Redirect or show success as needed
+      router.push('/dashboard/overview');
+
     } catch (err: any) {
       setError(err.message);
     } finally {

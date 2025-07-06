@@ -50,6 +50,7 @@ import { useAuth } from './providers';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { Button } from '../ui/button';
+import { StaticOrgDisplay } from '../static-org-display';
 export const company = {
   name: 'Acme Inc',
   logo: IconPhotoUp,
@@ -81,11 +82,7 @@ export default function AppSidebar() {
   return (
     <Sidebar collapsible='icon'>
       <SidebarHeader>
-        <OrgSwitcher
-          tenants={tenants}
-          defaultTenant={activeTenant}
-          onTenantSwitch={handleSwitchTenant}
-        />
+        <StaticOrgDisplay app='Audit Marketplace' name='Sheetsway' />
       </SidebarHeader>
       <SidebarContent className='overflow-x-hidden'>
         <SidebarGroup>
