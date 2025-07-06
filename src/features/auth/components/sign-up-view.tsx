@@ -91,9 +91,9 @@ export default function SignUpViewPage({
         {/* Testimonial */}
         <div className='space-y-6'>
           <blockquote className='text-lg leading-relaxed text-white'>
-            "The onboarding process was seamless and the interface is incredibly
-            user-friendly. Within minutes, I was able to set up my account and
-            start exploring all the amazing features."
+            &ldquo;The onboarding process was seamless and the interface is
+            incredibly user-friendly. Within minutes, I was able to set up my
+            account and start exploring all the amazing features.&rdquo;
           </blockquote>
 
           <div className='flex items-center space-x-4'>

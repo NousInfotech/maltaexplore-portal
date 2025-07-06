@@ -84,9 +84,9 @@ export default function SignInViewPage({
         {/* Testimonial */}
         <div className='space-y-6'>
           <blockquote className='text-lg leading-relaxed text-white'>
-            "Shadcn UI Kit for Figma has completely transformed our design
-            process. It's incredibly intuitive and saves us so much time. The
-            components are beautifully crafted and customizable."
+            &ldquo;Shadcn UI Kit for Figma has completely transformed our design
+            process. It&apos;s incredibly intuitive and saves us so much time.
+            The components are beautifully crafted and customizable.&rdquo;
           </blockquote>
 
           <div className='flex items-center space-x-4'>
@@ -312,7 +312,7 @@ export default function SignInViewPage({
               <div
                 className={`text-center text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
               >
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link
                   href='/auth/sign-up'
                   className={`font-medium ${isDark ? 'text-white hover:text-gray-300' : 'text-gray-900 hover:text-gray-700'} underline`}
