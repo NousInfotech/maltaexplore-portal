@@ -73,19 +73,20 @@ export function PayoutsPage() {
       </header>
       
       {/* Payout Request Section */}
-      <Card>
+      <Card className="not-dark:bg-pink-100">
         <CardHeader>
           <CardTitle>Request a Payout</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Alert>
-            <Wallet className="h-4 w-4" />
+            <Wallet className="h-4 w-4 not-dark:text-red-400" />
             <AlertTitle>Available for Payout: €{availableAmount.toFixed(2)}</AlertTitle>
             <AlertDescription>The minimum amount for a payout request is €{minPayout.toFixed(2)}.</AlertDescription>
           </Alert>
           <Button 
+            variant="outline"
             size="lg" 
-            className="w-full sm:w-auto" 
+            className="w-full sm:w-auto not-dark:text-red-400" 
             disabled={availableAmount < minPayout}
             onClick={handleRequestPayout}
           >
@@ -95,7 +96,7 @@ export function PayoutsPage() {
       </Card>
 
       {/* Payout Methods Section */}
-      <Card>
+      <Card className="not-dark:bg-pink-100">
         <CardHeader>
           <CardTitle>Your Payout Methods</CardTitle>
           <CardDescription>Select your default method for receiving payments.</CardDescription>
@@ -106,15 +107,15 @@ export function PayoutsPage() {
               <Label key={method.id} htmlFor={method.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-md border p-4 hover:bg-accent hover:text-accent-foreground [&:has([data-state=checked])]:border-primary">
                 <RadioGroupItem value={method.id} id={method.id} />
                 <div className="flex items-center gap-3">
-                  {method.type === "Bank Transfer" && <Landmark className="h-6 w-6 text-muted-foreground" />}
-                  {method.type === "Revolut" && <Wallet className="h-6 w-6 text-muted-foreground" />}
+                  {method.type === "Bank Transfer" && <Landmark className="h-6 w-6 text-muted-foreground not-dark:text-red-400" />}
+                  {method.type === "Revolut" && <Wallet className="h-6 w-6 text-muted-foreground not-dark:text-red-400" />}
                   <div className="text-sm">
                     <p className="font-semibold">{method.type}</p>
                     <p className="text-muted-foreground">{method.details}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 mt-2 sm:mt-0 sm:ml-auto">
-                  {method.isDefault && <Badge variant="secondary"><CheckCircle className="mr-1 h-3 w-3" /> Default</Badge>}
+                  {method.isDefault && <Badge variant="outline"><CheckCircle className="mr-1 h-3 w-3" /> Default</Badge>}
                   <Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>
                 </div>
               </Label>
@@ -123,7 +124,7 @@ export function PayoutsPage() {
           <Separator />
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline"><PlusCircle className="mr-2 h-4 w-4" /> Add New Payout Method</Button>
+              <Button variant="outline" className="text-red-500 dark:text-white"><PlusCircle className="mr-2 h-4 w-4" /> Add New Payout Method</Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader><DialogTitle>Add a New Method</DialogTitle></DialogHeader>
@@ -140,7 +141,7 @@ export function PayoutsPage() {
       </Card>
 
       {/* Payout History Section */}
-      <Card>
+      <Card className="not-dark:bg-pink-100">
         <CardHeader>
           <CardTitle>Payout History</CardTitle>
           <CardDescription>A record of all payouts requested and sent to you.</CardDescription>

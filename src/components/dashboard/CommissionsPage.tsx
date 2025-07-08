@@ -144,7 +144,7 @@ export function CommissionsPage() {
               <Popover>
                 <PopoverTrigger asChild>
                   <Button id="date" variant={"outline"} className={cn("w-full justify-start text-left font-normal sm:w-auto", !date && "text-muted-foreground")}>
-                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    <CalendarIcon className="mr-2 h-4 w-4 text-red-500 dark:text-white" />
                     {date?.from ? (date.to ? (<>{format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}</>) : (format(date.from, "LLL dd, y"))) : (<span>Pick a date</span>)}
                   </Button>
                 </PopoverTrigger>
@@ -166,7 +166,7 @@ export function CommissionsPage() {
                 </SelectContent>
               </Select>
               <Button variant="outline" className="w-full sm:w-auto">
-                <Download className="mr-2 h-4 w-4" />
+                <Download className="mr-2 h-4 w-4 text-red-500 dark:text-white" />
                 Export
               </Button>
             </div>

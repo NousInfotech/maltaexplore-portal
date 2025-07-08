@@ -204,7 +204,7 @@ export function MarketingPage() {
                 <div className='flex items-center gap-2'>
                   <Button
                     variant='outline'
-                    className='w-full sm:w-auto'
+                    className='w-full sm:w-auto text-red-400 dark:text-white'
                     onClick={() =>
                       handleCopy(generalLink, 'General link copied!')
                     }
@@ -310,7 +310,8 @@ export function MarketingPage() {
               />
               <div className='flex items-center gap-2'>
                 <Button
-                  className='w-full sm:w-auto'
+                  variant='outline'
+                  className='w-full sm:w-auto text-red-400 dark:text-white'
                   onClick={() =>
                     handleCopy(specificTourLink, 'Tour link copied!')
                   }
@@ -405,7 +406,8 @@ export function MarketingPage() {
             {/* RESPONSIVE DESIGN */}
             <CardFooter className='flex gap-2'>
               <Button
-                className='flex-1'
+              variant='outline'
+                className='flex-1 text-red-400 dark:text-white'
                 onClick={() => handleCopy(whatsAppMessage, 'Message copied!')}
               >
                 <Copy className='mr-2 h-4 w-4' />
@@ -465,7 +467,7 @@ export function MarketingPage() {
                             size='icon'
                             onClick={() => handlePreviewMaterial(material.name)}
                           >
-                            <Eye className='h-4 w-4' />
+                            <Eye className='h-4 w-4 text-red-500 dark:text-white' />
                             <span className='sr-only'>Preview</span>
                           </Button>
                           <Button
@@ -475,7 +477,7 @@ export function MarketingPage() {
                               handleDownloadMaterial(material.name)
                             }
                           >
-                            <Download className='h-4 w-4' />
+                            <Download className='h-4 w-4 text-red-500 dark:text-white' />
                             <span className='sr-only'>Download</span>
                           </Button>
                         </TableCell>
