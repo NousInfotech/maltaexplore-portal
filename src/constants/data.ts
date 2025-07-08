@@ -22,45 +22,47 @@ export const navItems: NavItem[] = [
     items: []
   },
   {
-    title: 'Request',
-    url: '/dashboard/request',
-    icon: 'request', // IconFilePlus
+    title: 'Tour Catalog & Details Page',
+    url: '/dashboard/tour-catalog',
+    icon: 'map', 
     isActive: false,
-    shortcut: ['r', 'r'],
+    shortcut: ['t', 't'],
     items: []
   },
   {
-    title: 'Proposals',
-    url: '/dashboard/proposals',
-    icon: 'proposals', // IconFileText
+    title: 'Bookings',
+    url: '/dashboard/bookings',
+    icon: 'luggage', 
     isActive: false,
-    shortcut: ['p', 'p'],
+    shortcut: ['b', 'b'],
     items: []
   },
   {
-    title: 'Active Engagements',
-    url: '/dashboard/engagements',
-    icon: 'engagements', // IconBriefcase
+    title: 'Commissions',
+    url: '/dashboard/commissions',
+    icon: 'handCoins', 
     isActive: false,
-    shortcut: ['e', 'e'],
+    shortcut: ['m', 'm'],
     items: []
   },
   {
-    title: 'Payments',
-    url: '/dashboard/payments',
-    icon: 'payments', // IconCreditCard
+    title: 'Marketing, QR & Link Generators',
+    url: '/dashboard/marketingtools',
+    icon: 'badgedollar', 
+    isActive: false,
+    shortcut: ['m', 'm'],
+    items: []
+  },
+  
+  {
+    title: 'Payout Management',
+    url: '/dashboard/payouts',
+    icon: 'payments', 
     isActive: false,
     shortcut: ['y', 'y'],
     items: []
   },
-  {
-    title: 'History',
-    url: '/dashboard/history',
-    icon: 'history', // IconClock
-    isActive: false,
-    shortcut: ['h', 'h'],
-    items: []
-  },
+  
   {
     title: 'Connect',
     url: '/dashboard/connect',

@@ -1,5 +1,6 @@
 'use client';
 
+import { DashboardPage } from '@/components/dashboard/DashboardPage';
 import PageContainer from '@/components/layout/page-container';
 import { useAuth } from '@/components/layout/providers';
 import { Badge } from '@/components/ui/badge';
@@ -28,29 +29,7 @@ export default function OverViewLayout({
   bar_stats: React.ReactNode;
   area_stats: React.ReactNode;
 }) {
-  const buttons = [
-    {
-      name: 'Create Audit/Tax Request',
-      link: '/'
-    },
-
-    {
-      name: 'UploadFiles',
-      link: '/'
-    },
-    {
-      name: 'Last Created Job',
-      link: '/'
-    },
-    {
-      name: 'Schedule Meeting',
-      link: '/'
-    },
-    {
-      name: 'Contact&Support',
-      link: '/'
-    }
-  ];
+ 
 
   const { user } = useAuth();
 
@@ -63,7 +42,12 @@ export default function OverViewLayout({
           </h2>
         </div>
 
-        <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
+
+        <div>
+          <DashboardPage />
+        </div>
+
+        {/* <div className='*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs md:grid-cols-2 lg:grid-cols-4'>
           <Card className='@container/card'>
             <CardHeader>
               <CardDescription>Active Engagements</CardDescription>
@@ -153,11 +137,11 @@ export default function OverViewLayout({
               </div>
             </CardFooter>
           </Card>
-        </div>
+        </div> */}
 
         {/* TO ADD QUICK BUTTONS */}
 
-        <div className='my-10'>
+        {/* <div className='my-10'>
           <h3 className='font-semibold'>QUICK ACTIONS</h3>
           <div className='my-5 flex w-full flex-col items-center justify-center gap-10 px-5 md:flex-row md:justify-around md:overflow-x-auto md:px-0 md:whitespace-nowrap'>
             {buttons.map((btn, index) => (
@@ -171,7 +155,7 @@ export default function OverViewLayout({
               </Button>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* CHARTS BELOW */}
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-7'>
