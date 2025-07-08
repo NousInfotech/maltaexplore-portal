@@ -9,7 +9,13 @@ const baseConfig: NextConfig = {
         protocol: 'https',
         hostname: 'api.slingacademy.com',
         port: ''
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        pathname: '/**', // This allows any path from picsum.photos
+      },
     ]
   },
   transpilePackages: ['geist']

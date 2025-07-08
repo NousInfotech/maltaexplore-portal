@@ -204,7 +204,7 @@ export function MarketingPage() {
                 <div className='flex items-center gap-2'>
                   <Button
                     variant='outline'
-                    className='w-full sm:w-auto text-red-400 dark:text-white'
+                    className='w-full text-red-400 sm:w-auto dark:text-white'
                     onClick={() =>
                       handleCopy(generalLink, 'General link copied!')
                     }
@@ -311,7 +311,7 @@ export function MarketingPage() {
               <div className='flex items-center gap-2'>
                 <Button
                   variant='outline'
-                  className='w-full sm:w-auto text-red-400 dark:text-white'
+                  className='w-full text-red-400 sm:w-auto dark:text-white'
                   onClick={() =>
                     handleCopy(specificTourLink, 'Tour link copied!')
                   }
@@ -406,7 +406,7 @@ export function MarketingPage() {
             {/* RESPONSIVE DESIGN */}
             <CardFooter className='flex gap-2'>
               <Button
-              variant='outline'
+                variant='outline'
                 className='flex-1 text-red-400 dark:text-white'
                 onClick={() => handleCopy(whatsAppMessage, 'Message copied!')}
               >

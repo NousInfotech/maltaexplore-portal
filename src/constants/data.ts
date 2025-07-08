@@ -23,7 +23,7 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'Tour Catalog & Details Page',
-    url: '/dashboard/tour-catalog',
+    url: '/dashboard/tour-catelog',
     icon: 'map', 
     isActive: false,
     shortcut: ['t', 't'],
@@ -31,7 +31,7 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'Bookings',
-    url: '/dashboard/bookings',
+    url: '/dashboard/booking',
     icon: 'luggage', 
     isActive: false,
     shortcut: ['b', 'b'],
@@ -64,8 +64,8 @@ export const navItems: NavItem[] = [
   },
   
   {
-    title: 'Connect',
-    url: '/dashboard/connect',
+    title: 'Contact',
+    url: '/dashboard/contact',
     icon: 'connect', // IconMessageCircle
     shortcut: ['c', 'c'],
     isActive: false,
