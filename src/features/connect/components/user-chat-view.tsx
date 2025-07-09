@@ -11,7 +11,7 @@ import {
   Settings,
   ArrowLeft,
   Paperclip,
-  Image,
+  Image as IMG,
   File,
   Smile
 } from 'lucide-react';
@@ -241,7 +241,7 @@ export const UserChatView: React.FC<UserChatViewProps> = ({ onBack }) => {
             <Paperclip className='text-muted-foreground h-4 w-4' />
           </button>
           <button className='hover:bg-secondary rounded-lg p-2 transition-colors'>
-            <Image className='text-muted-foreground h-4 w-4' />
+            <IMG className='text-muted-foreground h-4 w-4'/>
           </button>
           <button className='hover:bg-secondary rounded-lg p-2 transition-colors'>
             <File className='text-muted-foreground h-4 w-4' />

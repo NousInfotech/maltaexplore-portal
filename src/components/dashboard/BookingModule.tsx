@@ -4,13 +4,7 @@ import * as React from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  
-  CardFooter,
-  
-} from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -37,18 +31,8 @@ import {
   CommandItem
 } from '@/components/ui/command';
 import { cn } from '@/lib/utils';
+import { tours } from './TourCatalogPage';
 
-// --- Mock Data & Types ---
-interface Tour {
-  id: string;
-  name: string;
-  price: number;
-}
-const mockTour: Tour = {
-  id: '1',
-  name: 'Gozo Jeep Safari',
-  price: 75.0
-};
 const pickupLocations = [
   { value: 'st-julians', label: "St. Julian's" },
   { value: 'sliema', label: 'Sliema' },
@@ -89,6 +73,10 @@ const NumberInput = ({
 );
 
 export function BookingModulePage() {
+  const [selectedTourId, setSelectedTourId] = React.useState<
+    string | undefined
+  >(tours[0].id);
+  const [isTourPopoverOpen, setTourPopoverOpen] = React.useState(false);
   const [numPeople, setNumPeople] = React.useState(2);
   const [paymentMethod, setPaymentMethod] = React.useState<
     'reseller' | 'customer'
@@ -99,13 +87,20 @@ export function BookingModulePage() {
   const [showOtherAddress, setShowOtherAddress] = React.useState(false);
   const [otherAddress, setOtherAddress] = React.useState('');
 
-  const totalPrice = mockTour.price * numPeople;
+  const selectedTour = tours.find((tour) => tour.id === selectedTourId);
+  const totalPrice = (selectedTour?.price || 0) * numPeople;
 
   const handleConfirmBooking = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!selectedTour) {
+      toast.error('Please select a tour before confirming.');
+      return;
+    }
+
     const bookingDetails = {
-      tourId: mockTour.id,
-      tourName: mockTour.name,
+      tourId: selectedTour.id,
+      tourName: selectedTour.name,
       numPeople,
       totalPrice,
       paymentMethod,
@@ -115,7 +110,7 @@ export function BookingModulePage() {
     };
     console.log('Booking Confirmed:', bookingDetails);
     toast.success('Booking Confirmed!', {
-      description: `${mockTour.name} for ${numPeople} people has been booked.`
+      description: `${selectedTour.name} for ${numPeople} people has been booked.`
     });
   };
 
@@ -123,9 +118,14 @@ export function BookingModulePage() {
     <div className='mx-auto max-w-4xl p-4 md:p-8'>
       <header className='mb-4'>
         <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
-          Make a Booking: {mockTour.name}
+          Make a booking
         </h1>
-        <div className='text-muted-foreground mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm md:text-base'>
+        <p className='text-muted-foreground mt-1'>
+          {selectedTour
+            ? `Booking for: ${selectedTour.name}`
+            : 'Please select a tour'}
+        </p>
+        <div className='text-muted-foreground mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm md:text-base'>
           <span className='flex items-center'>
             <Calendar className='mr-1.5 h-4 w-4' /> 26 October 2023
           </span>
@@ -146,6 +146,55 @@ export function BookingModulePage() {
         <Card>
           <CardContent className='p-6'>
             <div className='space-y-8'>
+              {/* Tour Selection */}
+              <div>
+                <Label className='text-base font-semibold'>Select Tour</Label>
+                <Popover
+                  open={isTourPopoverOpen}
+                  onOpenChange={setTourPopoverOpen}
+                >
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant='outline'
+                      role='combobox'
+                      aria-expanded={isTourPopoverOpen}
+                      className='mt-2 w-full justify-between'
+                    >
+                      {selectedTour ? selectedTour.name : 'Select a tour...'}
+                      <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className='w-full p-0' align='start'>
+                    <Command>
+                      <CommandInput placeholder='Search tours...' />
+                      <CommandEmpty>No tour found.</CommandEmpty>
+                      <CommandGroup>
+                        {tours.map((tour) => (
+                          <CommandItem
+                            key={tour.id}
+                            value={tour.name}
+                            onSelect={() => {
+                              setSelectedTourId(tour.id);
+                              setTourPopoverOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                'mr-2 h-4 w-4',
+                                selectedTourId === tour.id
+                                  ? 'opacity-100'
+                                  : 'opacity-0'
+                              )}
+                            />
+                            {tour.name}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+              </div>
+
               {/* Number of People */}
               <div>
                 <Label htmlFor='numPeople' className='text-base font-semibold'>
@@ -197,7 +246,7 @@ export function BookingModulePage() {
                       <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className='w-full p-0'>
+                  <PopoverContent className='w-full p-0' align='start'>
                     <Command>
                       <CommandInput placeholder='Search locations...' />
                       <CommandEmpty>No location found.</CommandEmpty>
@@ -206,10 +255,11 @@ export function BookingModulePage() {
                           <CommandItem
                             key={loc.value}
                             onSelect={(currentValue) => {
+                              const value = loc.value;
                               setPickupValue(
-                                currentValue === pickupValue ? '' : currentValue
+                                value === pickupValue ? '' : value
                               );
-                              setShowOtherAddress(currentValue === 'other');
+                              setShowOtherAddress(value === 'other');
                             }}
                           >
                             <Check

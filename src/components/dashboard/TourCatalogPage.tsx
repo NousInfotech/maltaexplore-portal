@@ -41,7 +41,7 @@ interface Tour {
   location: TourLocation;
 }
 
-const tours: Tour[] = [
+export const tours: Tour[] = [
   {
     id: '1',
     name: 'Gozo Jeep Safari',
