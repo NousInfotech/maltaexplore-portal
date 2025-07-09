@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 'use client';
-import { useTheme } from 'next-themes';
+// import { useTheme } from 'next-themes';
 import React from 'react';
 import { ActiveThemeProvider } from '../active-theme';
 import { onAuthStateChanged, User } from 'firebase/auth';
