@@ -51,7 +51,7 @@ const MONO_THEMES = [
 ];
 
 export function ThemeSelector() {
-  const { activeTheme, setActiveTheme } = useThemeConfig({defaultTheme: 'default'});
+  const { activeTheme, setActiveTheme } = useThemeConfig();
 
   return (
     <div className='flex items-center gap-2'>

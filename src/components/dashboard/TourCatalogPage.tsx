@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
@@ -24,6 +23,7 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { BookingDialog } from './BookingDialog'; // <-- IMPORT THE NEW COMPONENT
 
 // --- Mock Data & Types ---
 type TourCategory = 'Boat Trips' | 'Land Tours' | 'Cultural';
@@ -124,10 +124,12 @@ const filterConfig = [
 
 const TourCard = ({
   tour,
-  viewMode
+  viewMode,
+  onBookClick
 }: {
   tour: Tour;
   viewMode: 'grid' | 'list';
+  onBookClick: (tour: Tour) => void;
 }) => {
   const isList = viewMode === 'list';
   return (
@@ -169,7 +171,9 @@ const TourCard = ({
           <Button variant='outline' className='w-full'>
             View Details
           </Button>
-          <Button className='w-full'>Quick Book</Button>
+          <Button className='w-full' onClick={() => onBookClick(tour)}>
+            Quick Book
+          </Button>
         </CardFooter>
       </div>
     </Card>
@@ -223,6 +227,7 @@ export function TourCatalogPage() {
   const [selectedFilters, setSelectedFilters] = React.useState<
     Record<string, string[]>
   >({});
+  const [bookingTour, setBookingTour] = React.useState<Tour | null>(null);
 
   const handleFilterChange = (
     groupId: string,
@@ -255,13 +260,21 @@ export function TourCatalogPage() {
     });
   }, [searchQuery, selectedFilters]);
 
+  const handleOpenBookingDialog = (tour: Tour) => {
+    setBookingTour(tour);
+  };
+
+  const handleCloseBookingDialog = () => {
+    setBookingTour(null);
+  };
+
   return (
     <div className='p-4 md:p-6 lg:p-8'>
       <header className='mb-6'>
         <h1 className='text-3xl font-bold tracking-tight'>Tour Catalog</h1>
-        <p className='text-muted-foreground'>
+        <div className='text-muted-foreground'>
           Browse, filter, and book from our curated list of tours.
-        </p>
+        </div>
       </header>
 
       {/* **FIXED** Main Layout Container */}
@@ -345,7 +358,12 @@ export function TourCatalogPage() {
               )}
             >
               {filteredTours.map((tour) => (
-                <TourCard key={tour.id} tour={tour} viewMode={viewMode} />
+                <TourCard
+                  key={tour.id}
+                  tour={tour}
+                  viewMode={viewMode}
+                  onBookClick={handleOpenBookingDialog}
+                />
               ))}
             </div>
           ) : (
@@ -356,6 +374,19 @@ export function TourCatalogPage() {
           )}
         </main>
       </div>
+
+      {/* **RENDER THE DIALOG AT THE END** */}
+      {bookingTour && (
+        <BookingDialog
+          tour={bookingTour}
+          isOpen={!!bookingTour}
+          onOpenChange={(isOpen) => {
+            if (!isOpen) {
+              handleCloseBookingDialog();
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

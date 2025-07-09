@@ -91,7 +91,7 @@ export function BookingDialog({
       customerName,
       customerContact
     };
-    console.log('Booking Confirmed:', bookingDetails);
+    
     toast.success('Booking Confirmed!', {
       description: `${tour.name} for ${numPeople} people.`
     });
@@ -105,14 +105,16 @@ export function BookingDialog({
           <DialogTitle className='text-xl'>
             Make a Booking: {tour.name}
           </DialogTitle>
-          <DialogDescription className='flex flex-wrap items-center gap-x-2 gap-y-1 pt-2'>
-            <Badge variant='secondary'>26 October 2023</Badge>
+          <DialogDescription asChild >
+            <div className='flex flex-wrap items-center gap-x-2 gap-y-1 pt-2'>
+              <Badge variant='secondary'>26 October 2023</Badge>
             <Badge variant='secondary'>10:00 AM</Badge>
             <Badge variant='secondary'>{numPeople} Adults</Badge>
             <Separator orientation='vertical' className='h-4' />
             <span className='text-foreground font-bold'>
               Total: €{totalPrice.toFixed(2)}
             </span>
+            </div>
           </DialogDescription>
         </DialogHeader>
 

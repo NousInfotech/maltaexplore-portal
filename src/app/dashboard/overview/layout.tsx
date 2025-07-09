@@ -3,19 +3,6 @@
 import { DashboardPage } from '@/components/dashboard/DashboardPage';
 import PageContainer from '@/components/layout/page-container';
 import { useAuth } from '@/components/layout/providers';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardAction,
-  CardFooter
-} from '@/components/ui/card';
-import { auth } from '@/lib/firebase';
-import { IconTrendingDown, IconTrendingUp } from '@tabler/icons-react';
-import Link from 'next/link';
 import React from 'react';
 
 export default function OverViewLayout({

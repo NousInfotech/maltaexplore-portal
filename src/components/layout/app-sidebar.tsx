@@ -45,7 +45,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import * as React from 'react';
 import { Icons } from '../icons';
-import { OrgSwitcher } from '../org-switcher';
+
 import { useAuth } from './providers';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
@@ -68,12 +68,9 @@ export default function AppSidebar() {
   const { isOpen } = useMediaQuery();
   const router = useRouter();
   const { user } = useAuth();
-  const handleSwitchTenant = (tenantId: string) => {
-    // Tenant switching functionality would be implemented here
-    console.log('Switching to tenant:', tenantId);
-  };
+  
 
-  const activeTenant = tenants[0];
+  
 
   React.useEffect(() => {
     // Side effects based on sidebar state changes

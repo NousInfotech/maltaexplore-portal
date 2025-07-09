@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import type React from 'react';
-import { redirect } from 'next/navigation';
+
 import Image from 'next/image';
 
 interface SignUpViewPageProps {

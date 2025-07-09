@@ -27,7 +27,7 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Phone, Mail, MapPin, Building } from 'lucide-react';
+import { Phone, Mail, Building } from 'lucide-react';
 
 // --- Main Component ---
 export function ContactPage() {
@@ -61,7 +61,7 @@ export function ContactPage() {
         {/* Contact Form Section */}
         <div className='lg:col-span-2'>
           <Card>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='space-y-6'>
               <CardHeader>
                 <CardTitle>Send us a Message</CardTitle>
                 <CardDescription>

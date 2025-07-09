@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Copy, QrCode, Download, Eye, Share2, Smartphone } from 'lucide-react';
+import { Copy, QrCode, Download, Eye, Smartphone } from 'lucide-react';
 import { toast } from 'sonner';
 import { QRCodeSVG } from 'qrcode.react';
 
@@ -54,7 +54,7 @@ interface PromoMaterial {
   previewUrl: string;
   downloadUrl: string;
 }
-
+// we can use unique userID here
 const resellerId = 'abc-hotel';
 const baseUrl = 'https://maltaxplore.com.mt';
 
@@ -320,7 +320,7 @@ export function MarketingPage() {
                 </Button>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant='secondary' className='w-full sm:w-auto'>
+                    <Button variant='outline' className='w-full sm:w-auto not-dark:text-red-400'>
                       <QrCode className='mr-2 h-4 w-4' />
                       <span className='hidden md:inline'>View/Download </span>QR
                     </Button>

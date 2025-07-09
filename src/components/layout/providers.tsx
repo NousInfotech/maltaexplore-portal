@@ -50,7 +50,7 @@ export default function Providers({
   children: React.ReactNode;
 }) {
   // we need the resolvedTheme value to set the baseTheme for clerk based on the dark or light theme
-  const { resolvedTheme } = useTheme();
+  // const { resolvedTheme } = useTheme();
   // resolvedTheme is used for theme detection but not directly used in this component
 
   return (
