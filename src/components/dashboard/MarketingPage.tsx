@@ -179,7 +179,7 @@ export function MarketingPage() {
       </header>
 
       <main className='space-y-12'>
-        <Card className='border-primary/20 dark:border-primary/40 bg-card'>
+        <Card className='border-primary/20 dark:border-primary/40 bg-card not-dark:bg-rose-50/40'>
           <CardHeader>
             <CardTitle className='text-xl'>
               Your All-in-One QR Code & Link
@@ -218,6 +218,7 @@ export function MarketingPage() {
                     className='flex-grow text-sm'
                   />
                   <Button
+                    className='not-dark:text-red-400'
                     variant='outline'
                     size='icon'
                     onClick={() =>
@@ -233,7 +234,8 @@ export function MarketingPage() {
                 <Label>Download QR Code</Label>
                 <div className='flex gap-2'>
                   <Button
-                    variant='secondary'
+                    className='not-dark:text-red-400'
+                    variant='outline'
                     onClick={() =>
                       handleDownloadQR(
                         generalQrRef,
@@ -245,7 +247,8 @@ export function MarketingPage() {
                     <Download className='mr-2 h-4 w-4' /> PNG
                   </Button>
                   <Button
-                    variant='secondary'
+                  className='not-dark:text-red-400'
+                    variant='outline'
                     onClick={() =>
                       handleDownloadQR(
                         generalQrRef,
@@ -299,6 +302,7 @@ export function MarketingPage() {
                   className='bg-card flex-grow text-sm'
                 />
                 <Button
+                  className='not-dark:text-red-400'
                   variant='outline'
                   onClick={() =>
                     handleCopy(specificTourLink, 'Tour link copied!')
@@ -329,7 +333,7 @@ export function MarketingPage() {
                       handleCopy(whatsAppMessage, 'Message copied!')
                     }
                   >
-                    <Copy className='h-4 w-4' />
+                    <Copy className='h-4 w-4 not-dark:text-red-400' />
                   </Button>
                 </div>
               </CardContent>
@@ -389,7 +393,7 @@ export function MarketingPage() {
                             size='icon'
                             onClick={() => handlePreviewMaterial(material.name)}
                           >
-                            <Eye className='h-4 w-4' />
+                            <Eye className='h-4 w-4 not-dark:text-red-400' />
                           </Button>
                           <Button
                             variant='ghost'
@@ -398,7 +402,7 @@ export function MarketingPage() {
                               handleDownloadMaterial(material.name)
                             }
                           >
-                            <Download className='h-4 w-4' />
+                            <Download className='h-4 w-4 not-dark:text-red-400' />
                           </Button>
                         </TableCell>
                       </TableRow>
