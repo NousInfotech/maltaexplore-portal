@@ -14,14 +14,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog';
+
 import { Input } from '@/components/ui/input';
 import {
   Select,
@@ -38,8 +31,9 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table';
+import { Label } from '../ui/label';
 
-// --- Mock Data & Types ---
+// --- Mock Data & Types
 interface Tour {
   id: string;
   name: string;
@@ -54,7 +48,7 @@ interface PromoMaterial {
   previewUrl: string;
   downloadUrl: string;
 }
-// we can use unique userID here
+// we can use unique userID/SellerID here
 const resellerId = 'abc-hotel';
 const baseUrl = 'https://maltaxplore.com.mt';
 
@@ -100,12 +94,12 @@ export function MarketingPage() {
   const [whatsAppMessage, setWhatsAppMessage] = React.useState<string>('');
 
   const generalQrRef = React.useRef<SVGSVGElement>(null);
-  const specificQrRef = React.useRef<SVGSVGElement>(null);
 
   const selectedTour = tours.find((t) => t.id === selectedTourId) || tours[0];
   const generalLink = `${baseUrl}/ref/${resellerId}`;
   const specificTourLink = `${baseUrl}/ref/${resellerId}/${selectedTour.slug}`;
 
+  // helper function
   React.useEffect(() => {
     const message = `Hey! Check out this amazing "${selectedTour.name}" in Malta. You can get more details and book it directly here: ${specificTourLink}`;
     setWhatsAppMessage(message);
@@ -179,275 +173,207 @@ export function MarketingPage() {
           Marketing Tools
         </h1>
         <p className='text-muted-foreground mt-1'>
-          Your central hub for links, QR codes, and materials to promote our
-          tours.
+          Your hub for links and materials to promote our tours and earn
+          commission.
         </p>
       </header>
 
-      <main className='grid gap-8 md:grid-cols-1 lg:grid-cols-2'>
-        <div className='space-y-8'>
-          <Card>
-            <CardHeader>
-              <CardTitle>Your General Affiliate Link</CardTitle>
-              <CardDescription>
-                Share this to direct customers to our homepage. Any booking will
-                be credited to you.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className='flex flex-col items-stretch gap-2 sm:flex-row sm:items-center'>
-                <Input
-                  value={generalLink}
-                  readOnly
-                  className='flex-grow text-sm'
-                />
+      <main className='space-y-12'>
+        <Card className='border-primary/20 dark:border-primary/40 bg-card not-dark:bg-rose-50/40'>
+          <CardHeader>
+            <CardTitle className='text-xl'>
+              Your All-in-One QR Code & Link
+            </CardTitle>
+            <CardDescription>
+              Place this QR code at your location (e.g., in your Airbnb, at the
+              hotel reception). When a customer scans it and books{' '}
+              <strong className='text-primary'>any tour</strong>, you'll earn a
+              commission. This is your main tool.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className='grid items-center gap-6 md:grid-cols-[200px_1fr] md:gap-8'>
+            {/* QR Code (Visible by default) */}
+            <div className='mx-auto flex flex-col items-center justify-center space-y-2'>
+              <QRCodeSVG
+                ref={generalQrRef}
+                value={generalLink}
+                size={180}
+                bgColor={'#ffffff'}
+                fgColor={'#000000'}
+                level={'L'}
+                includeMargin={true}
+              />
+            </div>
+            {/* Link and Actions */}
+            <div className='space-y-4'>
+              <div className='grid gap-2'>
+                <Label htmlFor='general-link'>
+                  Your General Affiliate Link
+                </Label>
                 <div className='flex items-center gap-2'>
+                  <Input
+                    id='general-link'
+                    value={generalLink}
+                    readOnly
+                    className='flex-grow text-sm'
+                  />
                   <Button
+                    className='not-dark:text-red-400'
                     variant='outline'
-                    className='w-full text-red-400 sm:w-auto dark:text-white'
+                    size='icon'
                     onClick={() =>
                       handleCopy(generalLink, 'General link copied!')
                     }
                   >
-                    <Copy className='mr-2 h-4 w-4' />
-                    <span className='hidden sm:inline'>Copy Link</span>
-                    <span className='sm:hidden'>Copy</span>
+                    <Copy className='h-4 w-4' />
+                    <span className='sr-only'>Copy Link</span>
                   </Button>
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button
-                        variant='outline'
-                        size='icon'
-                        className='flex-shrink-0'
-                      >
-                        <QrCode className='h-4 w-4' />
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className='sm:max-w-md'>
-                      <DialogHeader>
-                        <DialogTitle>General Link QR Code</DialogTitle>
-                        <DialogDescription>
-                          For posters, signs, or digital displays.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <div className='flex flex-col items-center justify-center space-y-4 py-4'>
-                        <QRCodeSVG
-                          ref={generalQrRef}
-                          value={generalLink}
-                          size={224}
-                          bgColor={'#ffffff'}
-                          fgColor={'#000000'}
-                          level={'L'}
-                          includeMargin={true}
-                        />
-                        <p className='text-muted-foreground px-4 text-center text-sm break-all'>
-                          {generalLink}
-                        </p>
-                      </div>
-                      <div className='flex justify-center gap-2'>
-                        <Button
-                          variant='secondary'
-                          onClick={() =>
-                            handleDownloadQR(
-                              generalQrRef,
-                              'png',
-                              'general-affiliate-qr'
-                            )
-                          }
-                        >
-                          <Download className='mr-2 h-4 w-4' /> PNG
-                        </Button>
-                        <Button
-                          variant='secondary'
-                          onClick={() =>
-                            handleDownloadQR(
-                              generalQrRef,
-                              'svg',
-                              'general-affiliate-qr'
-                            )
-                          }
-                        >
-                          <Download className='mr-2 h-4 w-4' /> SVG
-                        </Button>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              <div className='grid gap-2'>
+                <Label>Download QR Code</Label>
+                <div className='flex gap-2'>
+                  <Button
+                    className='not-dark:text-red-400'
+                    variant='outline'
+                    onClick={() =>
+                      handleDownloadQR(
+                        generalQrRef,
+                        'png',
+                        'general-affiliate-qr'
+                      )
+                    }
+                  >
+                    <Download className='mr-2 h-4 w-4' /> PNG
+                  </Button>
+                  <Button
+                  className='not-dark:text-red-400'
+                    variant='outline'
+                    onClick={() =>
+                      handleDownloadQR(
+                        generalQrRef,
+                        'svg',
+                        'general-affiliate-qr'
+                      )
+                    }
+                  >
+                    <Download className='mr-2 h-4 w-4' /> SVG
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Generate a Link for a Specific Tour</CardTitle>
-              <CardDescription>
-                Create a direct link to a specific tour page for targeted
-                promotions.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Select
-                onValueChange={setSelectedTourId}
-                defaultValue={selectedTourId}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder='Select a tour' />
-                </SelectTrigger>
-                <SelectContent>
-                  {tours.map((tour) => (
-                    <SelectItem key={tour.id} value={tour.id}>
-                      {tour.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </CardContent>
-            <CardFooter className='flex flex-col items-stretch gap-2 bg-slate-50 p-4 sm:flex-row sm:items-center dark:bg-slate-800/50'>
-              <Input
-                value={specificTourLink}
-                readOnly
-                className='flex-grow bg-white text-sm dark:bg-slate-900'
-              />
-              <div className='flex items-center gap-2'>
+        <div className='space-y-8'>
+          <h2 className='text-xl font-semibold tracking-tight'>
+            Advanced: Promote Specific Tours
+          </h2>
+          <div className='grid gap-8 md:grid-cols-1 lg:grid-cols-2'>
+            <Card>
+              <CardHeader>
+                <CardTitle>Generate a Link for a Specific Tour</CardTitle>
+                <CardDescription>
+                  Create a direct link to a single tour page for targeted
+                  promotions.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Select
+                  onValueChange={setSelectedTourId}
+                  defaultValue={selectedTourId}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder='Select a tour' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {tours.map((tour) => (
+                      <SelectItem key={tour.id} value={tour.id}>
+                        {tour.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </CardContent>
+              <CardFooter className='bg-muted flex flex-col items-stretch gap-2 p-4 sm:flex-row sm:items-center'>
+                <Input
+                  value={specificTourLink}
+                  readOnly
+                  className='bg-card flex-grow text-sm'
+                />
                 <Button
+                  className='not-dark:text-red-400'
                   variant='outline'
-                  className='w-full text-red-400 sm:w-auto dark:text-white'
                   onClick={() =>
                     handleCopy(specificTourLink, 'Tour link copied!')
                   }
                 >
-                  <Copy className='mr-2 h-4 w-4' /> Copy
+                  <Copy className='mr-2 h-4 w-4' /> Copy Link
                 </Button>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant='outline' className='w-full sm:w-auto not-dark:text-red-400'>
-                      <QrCode className='mr-2 h-4 w-4' />
-                      <span className='hidden md:inline'>View/Download </span>QR
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className='sm:max-w-md'>
-                    <DialogHeader>
-                      <DialogTitle>{selectedTour.name} QR Code</DialogTitle>
-                      <DialogDescription>
-                        Directs customers to the tour page.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className='flex flex-col items-center justify-center space-y-4 py-4'>
-                      <QRCodeSVG
-                        ref={specificQrRef}
-                        value={specificTourLink}
-                        size={224}
-                        bgColor={'#ffffff'}
-                        fgColor={'#000000'}
-                        level={'L'}
-                        includeMargin={true}
-                      />
-                      <p className='text-muted-foreground px-4 text-center text-sm break-all'>
-                        {specificTourLink}
-                      </p>
-                    </div>
-                    <div className='flex justify-center gap-2'>
-                      <Button
-                        variant='secondary'
-                        onClick={() =>
-                          handleDownloadQR(
-                            specificQrRef,
-                            'png',
-                            `${selectedTour.slug}-qr`
-                          )
-                        }
-                      >
-                        <Download className='mr-2 h-4 w-4' /> PNG
-                      </Button>
-                      <Button
-                        variant='secondary'
-                        onClick={() =>
-                          handleDownloadQR(
-                            specificQrRef,
-                            'svg',
-                            `${selectedTour.slug}-qr`
-                          )
-                        }
-                      >
-                        <Download className='mr-2 h-4 w-4' /> SVG
-                      </Button>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              </div>
-            </CardFooter>
-          </Card>
+              </CardFooter>
+            </Card>
+
+            <Card className='flex flex-col'>
+              <CardHeader>
+                <CardTitle>Share via WhatsApp</CardTitle>
+                <CardDescription>
+                  Quickly share a message for the selected tour above.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className='flex-grow'>
+                <div className='relative'>
+                  <p className='bg-muted text-muted-foreground h-32 overflow-y-auto rounded-md border p-4 text-sm'>
+                    {whatsAppMessage}
+                  </p>
+                  <Button
+                    variant='ghost'
+                    size='icon'
+                    className='absolute top-2 right-2 h-8 w-8'
+                    onClick={() =>
+                      handleCopy(whatsAppMessage, 'Message copied!')
+                    }
+                  >
+                    <Copy className='h-4 w-4 not-dark:text-red-400' />
+                  </Button>
+                </div>
+              </CardContent>
+              <CardFooter className='flex gap-2'>
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(whatsAppMessage)}`}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='flex-1'
+                >
+                  <Button
+                    variant='secondary'
+                    className='w-full bg-green-50 text-green-700 hover:bg-green-100 dark:bg-green-900/50 dark:text-green-300 dark:hover:bg-green-900/80'
+                  >
+                    <Smartphone className='mr-2 h-4 w-4' /> Share
+                  </Button>
+                </a>
+              </CardFooter>
+            </Card>
+          </div>
         </div>
 
+        {/* Promotional Materials section  */}
         <div className='space-y-8'>
-          <Card className='flex flex-col'>
-            <CardHeader>
-              <CardTitle>Share via WhatsApp</CardTitle>
-              <CardDescription>
-                Quickly share a pre-written message for the selected tour.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className='flex-grow'>
-              <div className='relative'>
-                <p className='bg-muted text-muted-foreground h-32 overflow-y-auto rounded-md border p-4 text-sm'>
-                  {whatsAppMessage}
-                </p>
-                <Button
-                  variant='ghost'
-                  size='icon'
-                  className='absolute top-2 right-2 h-8 w-8'
-                  onClick={() => handleCopy(whatsAppMessage, 'Message copied!')}
-                >
-                  <Copy className='h-4 w-4' />
-                  <span className='sr-only'>Copy Message</span>
-                </Button>
-              </div>
-            </CardContent>
-            {/* RESPONSIVE DESIGN */}
-            <CardFooter className='flex gap-2'>
-              <Button
-                variant='outline'
-                className='flex-1 text-red-400 dark:text-white'
-                onClick={() => handleCopy(whatsAppMessage, 'Message copied!')}
-              >
-                <Copy className='mr-2 h-4 w-4' />
-                <span className='hidden sm:inline'>Copy Text</span>
-                <span className='sm:hidden'>Copy</span>
-              </Button>
-              <a
-                href={`https://wa.me/?text=${encodeURIComponent(whatsAppMessage)}`}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='flex-1'
-              >
-                <Button
-                  variant='secondary'
-                  className='w-full bg-green-50 text-green-700 hover:bg-green-100 dark:bg-green-900/50 dark:text-green-300 dark:hover:bg-green-900/80'
-                >
-                  <Smartphone className='mr-2 h-4 w-4' />
-                  <span className='hidden sm:inline'>Share on WhatsApp</span>
-                  <span className='sm:hidden'>Share</span>
-                </Button>
-              </a>
-            </CardFooter>
-          </Card>
-
+          <h2 className='text-xl font-semibold tracking-tight'>
+            Downloadable Materials
+          </h2>
           <Card>
             <CardHeader>
               <CardTitle>Promotional Materials</CardTitle>
               <CardDescription>
-                Download ready-to-use flyers and posters.
+                Download ready-to-use flyers and posters featuring your QR code.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {/* This container ensures the table can be scrolled horizontally on small screens */}
               <div className='overflow-x-auto rounded-md border'>
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead className='whitespace-nowrap'>
-                        Material
-                      </TableHead>
+                      <TableHead>Material</TableHead>
                       <TableHead>Info</TableHead>
                       <TableHead className='text-right'>Actions</TableHead>
                     </TableRow>
@@ -458,7 +384,7 @@ export function MarketingPage() {
                         <TableCell className='font-medium'>
                           {material.name}
                         </TableCell>
-                        <TableCell className='text-muted-foreground whitespace-nowrap'>
+                        <TableCell className='text-muted-foreground'>
                           {material.type} ({material.size})
                         </TableCell>
                         <TableCell className='space-x-1 text-right'>
@@ -467,8 +393,7 @@ export function MarketingPage() {
                             size='icon'
                             onClick={() => handlePreviewMaterial(material.name)}
                           >
-                            <Eye className='h-4 w-4 text-red-500 dark:text-white' />
-                            <span className='sr-only'>Preview</span>
+                            <Eye className='h-4 w-4 not-dark:text-red-400' />
                           </Button>
                           <Button
                             variant='ghost'
@@ -477,8 +402,7 @@ export function MarketingPage() {
                               handleDownloadMaterial(material.name)
                             }
                           >
-                            <Download className='h-4 w-4 text-red-500 dark:text-white' />
-                            <span className='sr-only'>Download</span>
+                            <Download className='h-4 w-4 not-dark:text-red-400' />
                           </Button>
                         </TableCell>
                       </TableRow>
